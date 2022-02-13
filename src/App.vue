@@ -1,7 +1,17 @@
 <template>
   <div id="app">
-    <h1>{{ msg }}</h1>
+    <h1 v-text="msg"></h1>
     <img src="./assets/logo.png">
+    <hr>
+    <div v-html="contentHTML"></div>
+    <h2 v-html="bucleTitle"></h2>
+    <ul>
+      <li v-for="skill in skills"> {{ skill.name }}</li>
+    </ul>
+    <p v-if="msgShow">Contenido Visible(v-if)</p>
+
+    <p v-if="!msgHidden">Contenido Oculto (v-else)</p>
+
     <test></test>
   </div>
 </template>
@@ -16,7 +26,16 @@ export default {
   },
   data () {
     return {
-      msg: 'Bienvenidos a tu Vue.js App'
+      msg: 'Bienvenidos a tu Vue.js App (v-text)',
+      contentHTML: '<h2>HTML(v-html)</h2>',
+      bucleTitle: 'Lista de Habilidades(v-for)',
+      msgShow: true,
+      msgHidden: false,
+      skills: [
+      { name:'Lectura'},
+      { name:'Ejercicio'},
+      { name:'Caminar'}
+      ]
     }
   }
 }
@@ -41,7 +60,7 @@ ul {
 }
 
 li {
-  display: inline-block;
+  display: block;
   margin: 0 10px;
 }
 
