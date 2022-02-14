@@ -2,35 +2,18 @@
   <div id="app">
     <h1>Clase 5</h1>
     <fieldset class="car">
-      <legend>Evento: v-on:click="saludar()"</legend>
-      <button type="button" v-on:click="saludar">Click Me </button>
+      <legend>Propiedad Computada: computed()</legend>
+      <p>{{ fullName }}</p>
     </fieldset>
-
-    <fieldset class="car">
-      <legend>Evento: v-on:click="saludar(parametro)"</legend>
-      <button type="button" v-on:click="saludar2(user.lastName)">Click Me</button>
-    </fieldset>
-
-    <fieldset class="car">
-      <legend>Evento: v-model & v-on:click="saludar()"</legend>
-      <input type="text" v-model="user.firstName">
-      <button type="button" v-on:click="saludar2(user.firstName)">Click Me</button>
-    </fieldset>
-
-    <fieldset class="car">
-      <legend>Evento: v-on:keyup="typing" </legend>
-      <input type="text" v-on:keyup="typing">
-    </fieldset>
-
-    <fieldset class="car">
-      <legend>Evento: v-on:keyup.enter="typedEnter"</legend>
-      <input type="text" v-on:keyup.enter="typedEnter">
-    </fieldset>
-
+    <test msg="Msj para Componente Padre a hijo"></test>
+    <hr>
+      <User/>
   </div>
 </template>
 
 <script>
+import Test from './components/Test.vue'
+import User from './components/User.vue'
 
 export default {
   data () {
@@ -41,18 +24,13 @@ export default {
       }
     }
   },
-  methods: {
-    saludar: function(){
-      alert('Hola ' + this.user.firstName)
-    },
-    saludar2: function(name){
-      alert('Hola ' + name)
-    },
-    typing: function(e){
-      console.log(e.target.value)
-    },
-    typedEnter: function(e){
-      console.log('Se persiono Enter')
+  components:{
+    Test,
+    User
+  },
+  computed: {
+    fullName: function(){
+      return this.user.firstName + ' ' + this.user.lastName
     }
   }
 }
