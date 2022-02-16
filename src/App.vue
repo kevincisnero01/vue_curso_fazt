@@ -1,37 +1,19 @@
 <template>
   <div id="app">
-    <h1>Clase 5</h1>
-    <fieldset class="car">
-      <legend>Propiedad Computada: computed()</legend>
-      <p>{{ fullName }}</p>
-    </fieldset>
-    <test msg="Msj para Componente Padre a hijo"></test>
-    <hr>
       <User/>
   </div>
 </template>
 
 <script>
-import Test from './components/Test.vue'
 import User from './components/User.vue'
 
 export default {
   data () {
     return {
-      user: {
-        firstName: 'Kevin',
-        lastName: 'Cisnero'
-      }
     }
   },
   components:{
-    Test,
     User
-  },
-  computed: {
-    fullName: function(){
-      return this.user.firstName + ' ' + this.user.lastName
-    }
   }
 }
 </script>

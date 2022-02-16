@@ -3,7 +3,7 @@
 		<h1>Componente de Usuarios</h1>
 		<h3>Listado de Usuarios</h3>
 		<ul>
-			<li v-for="user in users" >{{ user.name }} - {{ user.email }}</li>
+			<li v-for="user in users" >{{ user.name }} - {{ user.email }} <button v-on:click="deleteUser(user)">X</button></li>
 		</ul>
 
 		<h3>Crear Usuario</h3>
@@ -19,7 +19,7 @@
 export	default {
 	data(){
 		return {
-			users: [
+			usersTest: [
 				{
 					name:'Jorge',
 					email: 'jor@gmail.com',
@@ -36,14 +36,27 @@ export	default {
 					contacted: false
 				}
 			],
+			users: [],
 			newUser:{}
 		}
 	},
 	methods: {
 		addUser(e){
 			e.preventDefault();
-			console.log('Agregando Usuario')
+			console.log('Usuario Agregado: ', this.newUser)
+			this.users.push(this.newUser)
+			this.newUser = {}
+
+		},
+		deleteUser(user){
+			this.users.splice(this.users.indexOf(user,1))
+			alert('Usuario ['+user.name+'] Eliminado...')
 		}
+	},
+	created(){
+		console.log('Componente Creado')
+		this.$http.get('https://jsonplaceholder.typicode.com/users')
+			.then(res => this.users = res.body)
 	}
 }
 </script>
